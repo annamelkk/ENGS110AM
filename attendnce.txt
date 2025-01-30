@@ -9,3 +9,8 @@ There are several OS, but the one used used by most developers is Linux. We were
 
 
 jan 30 2025
+All of the data stored by digital devices is encoded as bits. A group of 8 bits is called byte.
+We discussed several types of data representations during this class for computers. 
+One way data can be represented is binary system. This is a way of representing data using 0s and 1s.
+For reperesenting text ASCII or Unicode systems are employed by digital devices.
+At the end of the class we were presented on how to save changes made to a file in a local repository and commit it to remote repos such as Github.
