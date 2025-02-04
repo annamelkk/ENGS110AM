@@ -11,6 +11,14 @@ There are several OS, but the one used used by most developers is Linux. We were
 jan 30 2025
 All of the data stored by digital devices is encoded as bits. A group of 8 bits is called byte.
 We discussed several types of data representations during this class for computers. 
+
 One way data can be represented is binary system. This is a way of representing data using 0s and 1s.
 For reperesenting text ASCII or Unicode systems are employed by digital devices.
 At the end of the class we were presented on how to save changes made to a file in a local repository and commit it to remote repos such as Github.
+
+feb 4 2025
+During today's class types of data representationwere introduced. 
+First, the answer to the question "What can we do with data?" was answered. We can store, Process, Transmit and represent data. There are two ways of representing data: tables and mindmaps, the latter being more intuitive visually.
+Since data types vary siginificantly it is important to organize them appropriately. For this information that will be
+stored as datais divided into two categories - actual information and definition of information.
+
