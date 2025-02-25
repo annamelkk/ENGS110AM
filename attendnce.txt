@@ -36,4 +36,7 @@ For example arithmetic operators, logic (&&, || etc)  as well as bitewise (binar
 
 feb 18 2025
 feb 20 2025
+feb 25 2025
+This class included discussion of final projects and recommendations of some libraries that could be used during our final project development.
+The professor recommended using visual libraries (gnuplot), interpolations, MNIST and other libraries that enable working with textual data and encode/decode it.
 
