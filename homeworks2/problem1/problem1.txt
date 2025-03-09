@@ -1,0 +1,8 @@
+int main() {
+    printf("Hello World");
+    if (1) {
+        printf("Inside if");
+    }
+    return 0;
+}
+
