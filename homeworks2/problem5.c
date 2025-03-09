@@ -3,13 +3,14 @@
 #include <pthread.h>
 #include <sys/time.h>
 
+// matrix multiplication is defined when m=m  M[n,m]xN[m,n]
 #define M 500  // Rows of A and C
 #define N 500  // Columns of A, Rows of B
 #define P 500  // Columns of B and C
 #define NUM_THREADS 4  // Number of threads
 
-int A[M][N], B[N][P], C[M][P];  // Matrices
-pthread_t threads[NUM_THREADS];  // Thread handles
+int A[M][N], B[N][P], C[M][P];  // defining three matrices 
+pthread_t threads[NUM_THREADS];  // thread handles
 
 // Struct to pass arguments to threads
 typedef struct {
@@ -32,7 +33,7 @@ void initialize_matrices() {
     }
 }
 
-// Sequential matrix multiplication
+// looping through each row and column to compute C element by element
 void sequential_multiplication() {
     for (int i = 0; i < M; i++) {
         for (int j = 0; j < P; j++) {
@@ -49,7 +50,7 @@ void *thread_multiply(void *arg) {
     ThreadData *data = (ThreadData *)arg;
     struct timeval start, end;
     
-    gettimeofday(&start, NULL); // Start time
+    gettimeofday(&start, NULL); // start time
 
     for (int i = data->start_row; i < data->end_row; i++) {
         for (int j = 0; j < P; j++) {
@@ -60,7 +61,7 @@ void *thread_multiply(void *arg) {
         }
     }
 
-    gettimeofday(&end, NULL); // End time
+    gettimeofday(&end, NULL); // end time , thus time taken will be their difference
     double time_taken = (end.tv_sec - start.tv_sec) * 1e6;
     time_taken = (time_taken + (end.tv_usec - start.tv_usec)) * 1e-6;
     
@@ -69,7 +70,8 @@ void *thread_multiply(void *arg) {
     pthread_exit(NULL);
 }
 
-// Parallel matrix multiplication using threads
+// parallel matrix multiplication using threads
+// each thread calculates a portion of C
 void parallel_multiplication() {
     ThreadData thread_data[NUM_THREADS];
     int rows_per_thread = M / NUM_THREADS;
@@ -77,11 +79,13 @@ void parallel_multiplication() {
     for (int i = 0; i < NUM_THREADS; i++) {
         thread_data[i].start_row = i * rows_per_thread;
         thread_data[i].end_row = (i == NUM_THREADS - 1) ? M : (i + 1) * rows_per_thread;
-        pthread_create(&threads[i], NULL, thread_multiply, (void *)&thread_data[i]);
+        // launching the threads
+	pthread_create(&threads[i], NULL, thread_multiply, (void *)&thread_data[i]);
     }
 
     for (int i = 0; i < NUM_THREADS; i++) {
-        pthread_join(threads[i], NULL);
+        // waiting for them to finish
+	    pthread_join(threads[i], NULL);
     }
 }
 
