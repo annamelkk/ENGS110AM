@@ -3,7 +3,7 @@
 #include <unistd.h> // for sleep()
 
 /* 
-For simple turnstile wihtout FSM without any error detection 2 possible
+For simple turnstile FSM  without any error detection 2 possible states
     are enough to describe the machine
 
 By default the starting state is Locked, when a coin is inserted the turnstile unlocks, and the Thankyou() function is called, when the user passes the turnstile the system is locked again
@@ -19,17 +19,29 @@ void ThankYou() { printf("Thank you for the coin.\n"); }
 void Alarm() { printf("ALARM! Cannot pass, still locked.\n"); }
 void TimeoutMsg() {printf("Time out! Automatically locking. \n"); }
 
+
+
+
+
+// funtion to check if the turnstile has been left unlocked for too long
+void CheckTimeout(enum State* s, time_t* unlock_time)
+{
+	if (*s == Unlocked && difftime(time(NULL), *unlock_time) > 10) 
+	{
+		*s = Locked;
+		Lock();
+		TimeoutMsg();
+	}
+}
+
+// FSM transition logic
 void Transition(enum Event e) {
     static enum State s = Locked;
     static time_t unlock_time = 0;
+
+
     
-    // checking if the initial state is unlocke
-    if (s ==Unlocked && difftime(time(NULL), unlock_time) > 10) {
-    s = Locked;
-    Lock();
-    TimeoutMsg();
-    }
-    
+    CheckTimeout(&s, &unlock_time);
     
     switch (s) {
         case Locked:
@@ -61,16 +73,26 @@ void Transition(enum Event e) {
 }
 
 // Test function
+
 int main() {
+    char input;
+    printf("Turnstile FSM Simulation Started.\n");
 
-	Transition(Coin); //unlock
-	sleep(5); // assuming the system has sensors that detected passing
-	Transition(Pass);
+    while (1) {
+        printf("\nEnter event (c = coin, p = pass, q = quit): ");
+        scanf(" %c", &input);
 
+        if (input == 'q') break;
+        else if (input == 'c') {
+		Transition(Coin);
+		sleep(5); // delay to simulate real-time behavior
+		printf("Time Passed, locking!");
+			   }
+        else if (input == 'p') Transition(Pass);
+        else printf("Invalid input. Please enter 'c', 'p', or 'q'.\n");
 
-	Transition(Coin);
-	sleep(12); // open for more than 10 seconds, no one passed - time out
-	
+    }
 
+    printf("Simulation ended.\n");
+    return 0;
 }
-
