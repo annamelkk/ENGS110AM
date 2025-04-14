@@ -88,8 +88,12 @@ int main() {
 		sleep(5); // delay to simulate real-time behavior
 		printf("Time Passed, locking!");
 			   }
-        else if (input == 'p') Transition(Pass);
-        else printf("Invalid input. Please enter 'c', 'p', or 'q'.\n");
+        else if (input == 'p') { 
+	
+		Transition(Pass);
+	
+	}
+	else printf("Invalid input. Please enter 'c', 'p', or 'q'.\n");
 
     }
 
