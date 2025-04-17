@@ -7,10 +7,11 @@
 
 int main() 
 {
-	FILE *original= fopen("input.bmp", "rb");
-	FILE *new = fopen("output.bmp", "wb");
+	FILE *original= fopen( "input.bmp", "rb" ); // the image to be used for hding the message
+	FILE *new = fopen( "output.bmp", "wb" ); // output with the message
 
 
+	// error handling if the inputted files are empty
 	if ( original == NULL || new == NULL ) 
 	{
 		printf("Error opening files. \n");
@@ -23,9 +24,9 @@ int main()
 	fwrite( header, sizeof(unsigned char), HEADER_SIZE, new );
 	
 	unsigned char pixel;
-	while ( fread( &pixel, sizeof(unsigned char), 1, original ) )
+	while ( fread(&pixel, sizeof(unsigned char), 1, original) )
 	{
-		fwrite( &pixel, sizeof(unsigned char), 1, new );
+		fwrite(&pixel, sizeof(unsigned char), 1, new);
 
 	}
 
