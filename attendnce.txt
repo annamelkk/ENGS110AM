@@ -35,7 +35,22 @@ For example arithmetic operators, logic (&&, || etc)  as well as bitewise (binar
 
 
 feb 18 2025
+Reading files
+iput - .txt, .bin these are filetypes
+
+Different modes when opening 
+r - read
+rb - read binary
+w - write
+
+
+
 feb 20 2025
+
+Usage and app of XOR bitewise operator. 
+QUIZ
+
+
 feb 25 2025
 This class included discussion of final projects and recommendations of some libraries that could be used during our final project development.
 The professor recommended using visual libraries (gnuplot), interpolations, MNIST and other libraries that enable working with textual data and encode/decode it.
@@ -55,6 +70,18 @@ To manage shared data safely, we use mutexes:
  
 march 18
 Midterm preparation. Students were called to solve sample problems from the midterm.
+
+march 27
+
+FSM - state machines
+input - hardware - state
+
+
+enum stat {
+	RED,
+	GREEN,
+	YELLOW
+};
 
 
 april 3
