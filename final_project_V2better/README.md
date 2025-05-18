@@ -14,7 +14,7 @@ cd /path/to/stego/source
 make
 
 # Verify it works
-./stego
+./stegoapp
 ```
 
 You should see usage information displayed.
@@ -29,7 +29,7 @@ You should see usage information displayed.
 ### Encode Command
 
 ```bash
-./stego encode -i original.bmp -o hidden.bmp -m message.txt -p mysecretpassword
+./stegoapp encode -i original.bmp -o hidden.bmp -m message.txt -p mysecretpassword
 ```
 
 This will:
@@ -45,7 +45,7 @@ You should see a progress bar during the encoding process.
 ### Decode Command
 
 ```bash
-./stego decode -i hidden.bmp -o extracted.txt -p mysecretpassword
+./stegoapp decode -i hidden.bmp -o extracted.txt -p mysecretpassword
 ```
 
 This will:
@@ -74,30 +74,30 @@ This will:
 echo "This is my secret message" > secret.txt
 
 # Hide it in an image
-./stego encode -i photo.bmp -o stego_photo.bmp -m secret.txt
+./stegoapp encode -i photo.bmp -o stego_photo.bmp -m secret.txt
 
 # Later, extract it
-./stego decode -i stego_photo.bmp -o recovered.txt
+./stegoapp decode -i stego_photo.bmp -o recovered.txt
 ```
 
 ### Scenario 2: Protecting with a Password
 
 ```bash
 # Hide and protect
-./stego encode -i photo.bmp -o stego_photo.bmp -m confidential.txt -p "my complex passphrase"
+./stegoapp encode -i photo.bmp -o stego_photo.bmp -m confidential.txt -p "my complex passphrase"
 
 # Later, extract with the same password
-./stego decode -i stego_photo.bmp -o recovered.txt -p "my complex passphrase"
+./stegoapp decode -i stego_photo.bmp -o recovered.txt -p "my complex passphrase"
 ```
 
 ### Scenario 3: Using a Different Bit Position
 
 ```bash
 # Hide using bit position 1 instead of the default 0
-./stego encode -i photo.bmp -o stego_photo.bmp -m secret.txt -b 1
+./stegoapp encode -i photo.bmp -o stego_photo.bmp -m secret.txt -b 1
 
 # Must specify the same bit position when extracting
-./stego decode -i stego_photo.bmp -o recovered.txt -b 1
+./stegoapp decode -i stego_photo.bmp -o recovered.txt -b 1
 ```
 
 Enjoy using the steganography tool for your secret communications!
